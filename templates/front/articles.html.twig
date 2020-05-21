@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontController!{% endblock %}
+
+{% block body %}
+
+<section class="articles">
+
+    <a href="{{ path('article_create') }}" class="btn btn-primary">Ecrire un article</a>
+
+    {% for article in articles %}
+        <article>
+            <h2>{{ article.title }}</h2>
+            <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
+            <div class="content">
+                <img src="{{ article.image }}" alt="">
+                {{ article.content | raw }}
+                <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article>
+    {% endfor %}
+
+    <div>
+        <ul class="pagination pagination-lg">
+            {{ knp_pagination_render(articles) }}
+        </ul>
+    </div>
+      
+    
+    
+
+
+</section>
+
+{% endblock %}

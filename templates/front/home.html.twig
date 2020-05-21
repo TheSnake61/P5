@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    </br>
+
+    <img src="https://place-hold.it/1110x500" alt=""/>
+
+    <hr>
+
+    <div class="jumbotron">
+        <h1>Nos services</h1>
+        <hr class="my-4">
+
+        
+
+
+    </div>
+
+    <div class="jumbotron">
+        <h1>Derniers articles</h1>
+        <hr class="my-4">
+        {% for article in articles|slice(0, 5) %}
+            <article>
+                <h2>{{ article.title }}</h2>
+                <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
+                <div class="content">
+                    {{ article.content | raw }}
+                    <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                </div>
+            </article>
+            <hr class="my-4">
+        {% endfor %}
+
+
+    </div>
+
+    <div class="jumbotron">
+        <h1>Dernieres réalisations</h1>
+        <hr class="my-4">
+
+
+    </div>
+
+{% endblock %}
