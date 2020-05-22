@@ -101,40 +101,4 @@ class FrontController extends AbstractController
 
     // To move to backend
 
-    /**
-     * @Route("/article/new", name="article_create")
-     * @Route("/articles/{id}/edit", name="article_edit")
-     */
-    public function form(Articles $article = null, Request $request, EntityManagerInterface $manager)
-    {
-        if(!$article) {
-            $article = new Articles();
-        }
-        
-        // $form = $this->createFormBuilder($article)
-        //              ->add('title')
-        //              ->add('content')
-        //              ->add('image')
-        //              ->getForm();
-
-        $form = $this->createForm(ArticleType::class, $article);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            if(!$article->getId()){
-            $article->setCreatedAt(new \DateTime());
-            }
-
-            $manager->persist($article);
-            $manager->flush();
-
-            return $this->redirectToRoute('article', ['id' => $article->getId()]);
-        }
-
-        return $this->render('front/create.html.twig', [
-            'formArticle' => $form->createView(),
-            'editMode' => $article->getId() !== null
-        ]);
-    }
 }

@@ -5,8 +5,12 @@
 {% block body %}
 
 <section class="articles">
+    {% if is_granted('ROLE_ADMIN') %}
 
-    <a href="{{ path('article_create') }}" class="btn btn-primary">Ecrire un article</a>
+        <a href="{{ path('article_create') }}" class="btn btn-primary">Ecrire un article</a>
+
+    {% endif %}
+    
 
     {% for article in articles %}
         <article>
