@@ -6,8 +6,8 @@
 
    <h1>Inscription</h1> 
 
-   {{ form_start(form, {'attr': {'onsubmit':'return (validateForm())'}}) }}
-
+   {{ form_start(form, {'attr': {'id':'inscform'}}) }}
+   <div id="error"></div>
    {{ form_row(form.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
    {{ form_row(form.email, {'label': 'Adresse email', 'attr': {'placeholder': 'Adresse email'}}) }}
    {{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': 'Mot de passe'}}) }}
@@ -16,4 +16,8 @@
     <button type="submit" class="btn btn-success" id="inscCfrm">Inscription</button>
    {{ form_end(form) }}
 
+{% endblock %}
+
+{% block javascripts %}
+   <script src="{{ asset('js/validation.js') }}"></script>
 {% endblock %}

@@ -32,13 +32,13 @@ class Articles
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
+     * @ORM\Column(type="string")
      */
-    private $image;
+    private $imageFilename;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $createdAt;
 
@@ -81,14 +81,14 @@ class Articles
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImageFilename()
     {
-        return $this->image;
+        return $this->imageFilename;
     }
 
-    public function setImage(string $image): self
+    public function setImageFilename($imageFilename)
     {
-        $this->image = $image;
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }
