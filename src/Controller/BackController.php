@@ -58,7 +58,7 @@ class BackController extends AbstractController
                 $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
+                // Move the file to the directory where images are stored
                 try {
                     $imageFile->move(
                         $this->getParameter('images_directory'),
