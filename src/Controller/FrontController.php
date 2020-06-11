@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Articles;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Form\ContactType;
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -99,6 +100,51 @@ class FrontController extends AbstractController
         ]);
     }
 
-    // To move to backend
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $contactFormData = $form->getData();
+
+            $message = (new \Swift_Message('Contact mail infos/devis'))
+                ->setFrom($contactFormData['email'])
+                ->setTo('corentinlafay@gmail.com')
+                ->setBody(
+                    '<html>' .
+                    ' <body>' .
+                    '  Message de: ' .$contactFormData['name'].
+                    '<br>'.
+                    '  Adresse: ' .$contactFormData['email'].
+                    '<br>'.
+                    '  Message: ' .$contactFormData['message'].
+                    ' </body>' .
+                    '</html>',
+                    'text/html'
+                    
+                    
+                )
+            ;
+
+            $mailer->send($message);
+
+            return $this->redirectToRoute('contact');
+        }
+
+
+
+        return $this->render('front/contact.html.twig', [
+            'contactForm' => $form->createView(),
+        ]);
+
+    }
+           
+
 
 }

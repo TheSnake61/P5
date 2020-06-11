@@ -1,0 +1,17 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+    transport : gmail
+    host: smtp.gmail.com
+    port: 465
+    auth_mode: login
+    username: opnclsrmsprojects@gmail.com
+    password: Passbidon1234
+    encryption: ssl
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
+            verify_peer_name: false
+
+

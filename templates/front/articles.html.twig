@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FrontController!{% endblock %}
 
 {% block body %}
 
@@ -13,15 +12,19 @@
     
 
     {% for article in articles %}
+        <hr class="my-4">
         <article>
             <h2>{{ article.title }}</h2>
             <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
             <div class="content">
-                <img src="{{  asset('images/' ~ article.imageFilename) }}" alt="">
-                {{ article.content | raw }}
-                <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                <img src="{{  asset('images/' ~ article.imageFilename) }}" class="img-fluid rounded mx-auto" alt="">
+                <hr class="my-2">
+                {{ article.content | slice(0, 400) | raw }}...<br>
+                <div id="spacer"></div>
+                <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary btn-sm">Lire la suite</a>
             </div>
         </article>
+        <hr class="my-2">
     {% endfor %}
 
     <div>

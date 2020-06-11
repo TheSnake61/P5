@@ -3,19 +3,25 @@
 {% block body %}
 
 <article>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
     <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger" id="deletearticle">Supprimer</a>
-
+    {% endif %}
     <h2>{{ article.title }}</h2>
     <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
+    <hr class="my-4">
     <div class="content">
-        <img src="{{  asset('images/' ~ article.imageFilename) }}" alt="">
+        <img src="{{  asset('images/' ~ article.imageFilename) }}" class="img-fluid rounded mx-auto" alt="">
+        <div id="spacer"></div>
         {{ article.content | raw }}
     </div>
 </article>
 
+<div id="spacer"></div>
+
 <section id="comments">
     <h1>Commentaires :</h1>
+    <hr class="my-1">
     {% for comment in article.comments %}
         <div class="comment">
             <div class="row">
@@ -27,7 +33,10 @@
                 </div>
             </div>
         </div>
+        <hr class="my-2">
     {% endfor %}
+
+    <div id="spacer"></div>
     
     <h1>Ajouter un commentaire :</h1>
     {% if app.user %}

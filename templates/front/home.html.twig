@@ -5,17 +5,51 @@
 
     </br>
 
-    <img src="https://place-hold.it/1110x500" alt=""/>
+    
+    <img src="{{  asset('images/console.jpg') }}" class="img-fluid rounded mx-auto d-block" id="imgfpage" alt="Image page acceuil"/>
+    
 
     <hr>
 
     <div class="jumbotron">
         <h1>Nos services</h1>
         <hr class="my-4">
+        <div class="d-flex">
+            <div class="col-4">
+                <h5>Mixage</h5>
+                <img src="{{  asset('images/ab1.jpg') }}" class="img-fluid rounded" alt="">
+                <hr class="my-2">
+                <p>Nous utiliserons Reaper pour mener à bien le mixage de vos projets.</p>
+            </div>
+            <div class="col-4">
+                <h5>Recherche de votre son</h5>
+                <img src="{{  asset('images/ab2.jpg') }}" class="img-fluid rounded" alt="">
+                <hr class="my-2">
+                <p>A l'aide de divers plugins et instruments virtuels nous vous aiderons à trouver le son que vous recherchez !</p>
 
-        
+            </div>
+            <div class="col-4">
+                <h5>Effets analogiques</h5>
+                <img src="{{  asset('images/ab3.jpg') }}" class="img-fluid rounded" alt="">
+                <hr class="my-2">
+                <p>Nous disposons de divers effets analogiques que nous utiliserons pour forger votre son !</p>
+                <p>Nous fabriquons aussi des effets sur mesure.</p>
 
+            </div>
+        </div>
+        <hr class="my-2">
+        <p class="text-primary">Pour toute information concernant notre travail ou pour un devis veuillez nous contacter.</p>
+        <a href="{{ path('contact') }}" class="btn btn-primary">Contact</a>
+    </div>
 
+    <div class="jumbotron">
+        <h1>Réalisations</h1>
+        <hr class="my-4">
+        <p>Voici quelques mix réalisés par nos soins.</p>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/488980236&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-801139918" title="TheSnake" target="_blank" style="color: #cccccc; text-decoration: none;">TheSnake</a> · <a href="https://soundcloud.com/user-801139918/end-necessary-death-cover-mix" title="End - Necessary Death (cover) mix" target="_blank" style="color: #cccccc; text-decoration: none;">End - Necessary Death (cover) mix</a></div>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/489898347&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-801139918" title="TheSnake" target="_blank" style="color: #cccccc; text-decoration: none;">TheSnake</a> · <a href="https://soundcloud.com/user-801139918/tbdm-i-worship-only-what-you-bleed-cover-mix" title="TBDM - I Worship Only What You Bleed (cover) Mix" target="_blank" style="color: #cccccc; text-decoration: none;">TBDM - I Worship Only What You Bleed (cover) Mix</a></div>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/498702444&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-801139918" title="TheSnake" target="_blank" style="color: #cccccc; text-decoration: none;">TheSnake</a> · <a href="https://soundcloud.com/user-801139918/bnb" title="Black and Blue - Bring Me The Horizon (cover) mix" target="_blank" style="color: #cccccc; text-decoration: none;">Black and Blue - Bring Me The Horizon (cover) mix</a></div>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/499747617&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-801139918" title="TheSnake" target="_blank" style="color: #cccccc; text-decoration: none;">TheSnake</a> · <a href="https://soundcloud.com/user-801139918/nevermore-the-termination-proclamation-guitar-cover-mix" title="Nevermore - The Termination Proclamation (Guitar Cover) Mix (unofficial)" target="_blank" style="color: #cccccc; text-decoration: none;">Nevermore - The Termination Proclamation (Guitar Cover) Mix (unofficial)</a></div>
     </div>
 
     <div class="jumbotron">
@@ -24,11 +58,12 @@
         {% for article in articles|slice(0, 5) %}
             <article>
                 <h2>{{ article.title }}</h2>
-                <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
+                <div class="metadata"><em>ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</em></div>
+                <hr class="my-2">
                 <div class="content">
-                    {{ article.content | raw }}
-                    <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                    {{ article.content | slice(0, 200) | raw }}...
                 </div>
+                <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary btn-sm">Lire la suite</a>
             </article>
             <hr class="my-4">
         {% endfor %}
@@ -36,15 +71,11 @@
 
     </div>
 
-    <div class="jumbotron">
-        <h1>Dernieres réalisations</h1>
-        <hr class="my-4">
-
-
-    </div>
+    
 
 {% endblock %}
 
 {% block javascripts %}
-   <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+
+   
 {% endblock %}

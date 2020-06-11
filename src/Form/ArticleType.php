@@ -30,8 +30,8 @@ class ArticleType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                            'application/jpeg',
-                            'application/png',
+                            'image/jpeg',
+                            'image/png',
                         ],
                         'mimeTypesMessage' => 'Uploadez une image valide !',
                     ])
