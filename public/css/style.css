@@ -6,7 +6,30 @@
     width: 100%;
 }
 
-#navbar1 {
-    position: absolute;
-    right: 10%;
+.response {
+    margin-left: 5%;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+}
+
+#comment_parentId {
+    display: none;
+}
+
+
+
+
+
+
+@media (max-width: 800px) {
+    #services {
+        display: flex;
+        flex-direction: column;
+    }
+    #service {
+        max-width: 100%;
+    }
 }

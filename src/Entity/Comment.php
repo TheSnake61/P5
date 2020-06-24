@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,11 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $parentId;
 
     public function getId(): ?int
     {
@@ -86,6 +93,18 @@ class Comment
     public function setArticle(?Articles $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getParentId(): ?int
+    {
+        return $this->parentId;
+    }
+
+    public function setParentId(?int $parentId): self
+    {
+        $this->parentId = $parentId;
 
         return $this;
     }

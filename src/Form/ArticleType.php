@@ -36,8 +36,7 @@ class ArticleType extends AbstractType
                         'mimeTypesMessage' => 'Uploadez une image valide !',
                     ])
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

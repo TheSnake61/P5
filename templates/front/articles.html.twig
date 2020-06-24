@@ -3,40 +3,23 @@
 
 {% block body %}
 
-<section class="articles">
-    {% if is_granted('ROLE_ADMIN') %}
+	<section class="articles">
+		{% if is_granted('ROLE_ADMIN') %}
 
-        <a href="{{ path('article_create') }}" class="btn btn-primary">Ecrire un article</a>
+			<a href="{{ path('article_create') }}" class="btn btn-primary">Ecrire un article</a>
 
-    {% endif %}
-    
-
-    {% for article in articles %}
-        <hr class="my-4">
-        <article>
-            <h2>{{ article.title }}</h2>
-            <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
-            <div class="content">
-                <img src="{{  asset('images/' ~ article.imageFilename) }}" class="img-fluid rounded mx-auto" alt="">
-                <hr class="my-2">
-                {{ article.content | slice(0, 400) | raw }}...<br>
-                <div id="spacer"></div>
-                <a href="{{ path('article', {'id': article.id}) }}" class="btn btn-primary btn-sm">Lire la suite</a>
-            </div>
-        </article>
-        <hr class="my-2">
-    {% endfor %}
-
-    <div>
-        <ul class="pagination pagination-lg">
-            {{ knp_pagination_render(articles) }}
-        </ul>
-    </div>
-      
-    
-    
+		{% endif %}
 
 
-</section>
+	</section>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/articles.js') }}"></script>
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
 
 {% endblock %}

@@ -18,14 +18,15 @@ class SecurityController extends AbstractController
     /**
      *  @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    {
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($hash);
@@ -44,19 +45,23 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connexion", name="security_login")
      */
-    public function login(){
+    public function login()
+    {
         return $this->render('security/login.html.twig');
     }
 
     /**
      * @Route("/deconnexion", name="security_logout")
      */
-    public function logout() {}
+    public function logout()
+    {
+    }
 
     /**
-    * @Route("/forgottenPassword", name="forgotten_password")
-    */
-    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator){
+     * @Route("/forgottenPassword", name="forgotten_password")
+     */
+    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
+    {
 
         if ($request->isMethod('POST')) {
 
@@ -72,7 +77,7 @@ class SecurityController extends AbstractController
             }
             $token = $tokenGenerator->generateToken();
 
-            try{
+            try {
                 $user->setResetToken($token);
                 $entityManager->flush();
             } catch (\Exception $e) {
@@ -124,14 +129,9 @@ class SecurityController extends AbstractController
             $this->addFlash('notice', 'Mot de passe mis à jour');
 
             return $this->redirectToRoute('home');
-        }else {
+        } else {
 
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
-
     }
-
-
-
-    
 }

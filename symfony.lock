@@ -105,6 +105,18 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "friendsofsymfony/jsrouting-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.3",
+            "ref": "a9f2e49180f75cdc71ae279a929c4b2e0638de84"
+        },
+        "files": [
+            "./config/routes/fos_js_routing.yaml"
+        ]
+    },
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
@@ -167,6 +179,18 @@
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
     },
     "symfony/asset": {
         "version": "v4.4.5"
@@ -548,6 +572,9 @@
     },
     "webmozart/assert": {
         "version": "1.7.0"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

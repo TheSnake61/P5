@@ -2,58 +2,126 @@
 
 {% block body %}
 
-<article>
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
-    <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger" id="deletearticle">Supprimer</a>
-    {% endif %}
-    <h2>{{ article.title }}</h2>
-    <div class="metadata">ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }}</div>
-    <hr class="my-4">
-    <div class="content">
-        <img src="{{  asset('images/' ~ article.imageFilename) }}" class="img-fluid rounded mx-auto" alt="">
-        <div id="spacer"></div>
-        {{ article.content | raw }}
-    </div>
-</article>
+	<article>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
+			<a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger" id="deletearticle">Supprimer</a>
+		{% endif %}
+		<h2>{{ article.title }}</h2>
+		<div class="metadata">ecrit le
+			{{ article.createdAt | date('d/m/y') }}
+			à
+			{{ article.createdAt | date('H:i') }}</div>
+		<hr class="my-4">
+		<div class="content">
+			<img src="{{ asset('images/' ~ article.imageFilename) }}" class="img-fluid rounded mx-auto" alt="">
+			<div id="spacer"></div>
+			{{ article.content | raw }}
+		</div>
+	</article>
 
-<div id="spacer"></div>
+	<div id="spacer"></div>
+	<div class="container">
 
-<section id="comments">
-    <h1>Commentaires :</h1>
-    <hr class="my-1">
-    {% for comment in article.comments %}
-        <div class="comment">
-            <div class="row">
-                <div class="col-3">
-                    {{comment.author}} (<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
-                </div>
-                <div class="col">
-                    {{comment.content | raw}}
-                </div>
-            </div>
-        </div>
-        <hr class="my-2">
-    {% endfor %}
+		<section id="comments">
 
-    <div id="spacer"></div>
-    
-    <h1>Ajouter un commentaire :</h1>
-    {% if app.user %}
-        {{ form_start(commentForm) }}
-        
-        {{ form_row(commentForm.content, {'label': 'Commentaire', 'attr': {'placeholder': 'Commentaire'}}) }}
-        <button type="submit" class="btn btn-success">Commenter</button>
-        {{ form_end(commentForm) }}
-    {% else %}
-        <p>Vous devez vous connecter pour commenter</p>
-        <a href="{{path('security_login')}}" class="btn btn-primary">Connexion</a>
-    {% endif %}
+			<h1 id="comtitle">Ajouter un commentaire :</h1>
+			{% if app.user %}
 
-</section>
+				<button id="cancbtn" class="btn btn-sm btn-danger">Annuler la réponse</button>
+
+
+				{{ form_start(commentForm) }}
+
+				{{ form_row(commentForm.parentId, {'attr': {'placeholder': 'null'}}) }}
+
+
+				{{ form_row(commentForm.content, {'label': 'Commentaire', 'attr': {'placeholder': 'Commentaire'}}) }}
+				<button type="submit" class="btn btn-success">Commenter</button>
+
+
+				{{ form_end(commentForm) }}
+			{% else %}
+				<p>Vous devez vous connecter pour commenter</p>
+				<a href="{{path('security_login')}}" class="btn btn-primary">Connexion</a>
+			{% endif %}
+
+
+			<h1>Commentaires :</h1>
+			<hr class="my-1">
+			{% set lastid = null %}
+
+			{% for comment in article.comments %}
+
+
+				{% if comment.parentId == null %}
+					{% set lastid = comment.id %}
+
+					<div class="comment">
+						<div class="row">
+							<div class="col-2">
+								{{comment.author}}
+								(<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
+							</div>
+							<div class="col-8">
+								{{comment.content | raw}}
+							</div>
+							<div class="col-1">
+								{% if app.user %}
+
+									<button id="repbtn" data-id="{{ comment.id }}" class="btn btn-sm btn-info">Répondre</button>
+								{% endif %}
+
+
+							</div>
+
+						</div>
+
+
+					</div>
+					<p>
+						<strong>Réponses :</strong>
+					</p>
+
+					<hr class="my-2">
+					{% for comment in article.comments %}
+						{% if comment.parentId == lastid %}
+
+							<div class="response">
+
+								<div class="row">
+									<div class="col-3">
+										{{comment.author}}
+										(<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
+									</div>
+									<div class="col-7">
+										{{comment.content | raw}}
+									</div>
+
+
+								</div>
+
+							</div>
+							<hr class="my-2">
+
+						{% endif %}
+					{% endfor %}
+					{% set lastid = null %}
+
+
+				{% endif %}
+			{% endfor %}
+
+			<div id="spacer"></div>
+		</div>
+
+
+	</section>
 
 {% endblock %}
 
 {% block javascripts %}
-   <script src="{{ asset('js/deletearticle.js') }}"></script>
+	<script src="{{ asset('js/deletearticle.js') }}"></script>
+	<script src="{{ asset('js/answer.js') }}"></script>
+
 {% endblock %}
