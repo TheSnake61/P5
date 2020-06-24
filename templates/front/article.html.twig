@@ -25,7 +25,7 @@
 
 		<section id="comments">
 
-			<h1 id="comtitle">Ajouter un commentaire :</h1>
+			<h3 id="comtitle">Ajouter un commentaire :</h3>
 			{% if app.user %}
 
 				<button id="cancbtn" class="btn btn-sm btn-danger">Annuler la réponse</button>
@@ -47,7 +47,7 @@
 			{% endif %}
 
 
-			<h1>Commentaires :</h1>
+			<h3>Commentaires :</h3>
 			<hr class="my-1">
 			{% set lastid = null %}
 
@@ -66,7 +66,7 @@
 							<div class="col-8">
 								{{comment.content | raw}}
 							</div>
-							<div class="col-1">
+							<div>
 								{% if app.user %}
 
 									<button id="repbtn" data-id="{{ comment.id }}" class="btn btn-sm btn-info">Répondre</button>

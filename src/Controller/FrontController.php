@@ -27,36 +27,7 @@ class FrontController extends AbstractController
 {
 
 
-    /**
-     * @Route("/articlesall", name="articlesall")
-     */
-    public function articlesall(ArticlesRepository $repo, PaginatorInterface $paginator, Request $request)
-    {
-
-
-
-
-        $articles = $repo->findAll();
-
-
-
-
-        foreach ($articles as $article) {
-            $data[] = [
-                'id' => $article->getId(),
-                'title' => $article->getTitle(),
-                'content' => $article->getContent(),
-                'imageFilename' => $article->getImageFilename(),
-                'createdAt' => $article->getCreatedAt()
-            ];
-        }
-
-
-
-        return new JsonResponse(
-            $data
-        );
-    }
+    
 
 
     /**
@@ -76,9 +47,10 @@ class FrontController extends AbstractController
             5 /*limit per page*/
         );
 
+        $result=[];
 
         foreach ($articles as $article) {
-            $data[] = [
+            $result[] = [
                 'id' => $article->getId(),
                 'title' => $article->getTitle(),
                 'content' => $article->getContent(),
@@ -90,22 +62,25 @@ class FrontController extends AbstractController
 
 
         return new JsonResponse(
-            $data
+            $result
         );
     }
 
     /**
      * @Route("/articles", name="articles")
      */
-    public function articles()
+    public function articles(ArticlesRepository $repo)
     {
-
+        $data=$repo->findAll();
+        $articlecount=count($data);
+        
 
 
 
 
         return $this->render('front/articles.html.twig', [
             'controller_name' => 'FrontController',
+            'articlecount'  => $articlecount,
         ]);
     }
 
@@ -117,7 +92,7 @@ class FrontController extends AbstractController
         $articles = $repo->findAll();
 
         return  $this->render('front/home.html.twig', [
-            'title' => "Bienvenue",
+            
             'controller_name' => 'FrontController',
             'articles' => $articles,
         ]);
@@ -186,7 +161,7 @@ class FrontController extends AbstractController
 
             $message = (new \Swift_Message('Contact mail infos/devis'))
                 ->setFrom($contactFormData['email'])
-                ->setTo('corentinlafay@gmail.com')
+                ->setTo('opnclsrmsprojects@gmail.com')
                 ->setBody(
                     '<html>' .
                         ' <body>' .

@@ -13,13 +13,38 @@
 
 	</section>
 
+	<div id="pagination">
+		<ul class="pagination">
+			<li class="page-item">
+				<a id="firstpage" class="page-link" href="#">Première page</a>
+			</li>
 
-{% endblock %}
-
-{% block javascripts %}
-	<script src="{{ asset('js/articles.js') }}"></script>
-	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+			<li class="page-item">
+				<a id="prevpage" class="page-link" href="#">&laquo;</a>
+			</li>
 
 
-{% endblock %}
+			<li class="page-item">
+				<a id="nextpage" class="page-link" href="#">&raquo;</a>
+
+			</li>
+			<li class="page-item">
+				<a id="lastpage" class="page-link" href="#">Dernière page</a>
+
+			</li>
+
+		</ul>
+	</div>
+
+	<div id="res-result" data-res="{{ articlecount }}" style="display: none;">
+
+
+	{% endblock %}
+
+	{% block javascripts %}
+		<script src="{{ asset('js/articles.js') }}"></script>
+		<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+		<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+
+	{% endblock %}
