@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<h1>Livre d'or</h1>
+
+	<p>Votre avis nous interesse, laissez nous une évaluation !</p>
+
+	<div>
+		{% if app.user %}
+
+			{{ form_start(livredorForm) }}
+			{{ form_widget(livredorForm) }}
+			<button type="submit" class="btn btn-success">Envoyer</button>
+			{{ form_end(livredorForm) }}
+		{% else %}
+			<p>Vous devez vous connecter pour nous évaluer</p>
+			<a href="{{path('security_login')}}" class="btn btn-primary">Connexion</a>
+		{% endif %}
+
+	</div>
+
+	{% for livredor in livredor %}
+		<div class="evaluation">
+			<div class="row">
+				<div class="col-2">
+					{{livredor.name}}
+					(<small>{{livredor.createdAt | date('d/m/Y à H:i')}}</small>)
+				</div>
+				<div class="col-2">
+					{{livredor.rating}}
+
+				</div>
+
+				<div class="col-8">
+					{{livredor.content | raw}}
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	{% endfor %}
+
+
+{% endblock %}

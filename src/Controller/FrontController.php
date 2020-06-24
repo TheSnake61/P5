@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Articles;
+use App\Entity\Livredor;
 use App\Entity\Reply;
 use App\Form\ArticleType;
+use App\Form\LivredorType;
 use App\Form\CommentType;
 use App\Form\ContactType;
 use App\Form\ReplyType;
 use App\Repository\ArticlesRepository;
+use App\Repository\LivredorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -134,14 +137,43 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/realisations", name="realisations")
+     * @Route("/livredor", name="livredor", options={"expose"=true})
      */
-    public function realisations()
+    public function livredor(Request $request, LivredorRepository $repo, EntityManagerInterface $manager)
     {
 
 
-        return  $this->render('front/realisations.html.twig', [
-            'title' => "Bienvenue",
+        $user = $this->getUser();
+
+        $entry = new Livredor();
+
+        $form = $this->createForm(LivredorType::class, $entry);
+
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entry->setCreatedAt(new \DateTime())
+                  ->setName($user->getUsername())
+                  ->setValid(1);
+                
+
+            $manager->persist($entry);
+            $manager->flush();
+
+            return $this->redirectToRoute('livredor');
+        }
+        
+        $livredor = $repo->findAll();
+            
+
+       
+
+        return  $this->render('front/livredor.html.twig', [
+            'livredor' => $livredor,
+            'livredorForm' => $form->createView(),
+            
 
         ]);
     }
